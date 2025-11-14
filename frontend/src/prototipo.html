@@ -1,0 +1,474 @@
+<!doctype html>
+<html lang="pt-BR" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UBD - Análise de Dados</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            box-sizing: border-box;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: inherit;
+        }
+
+        .sidebar-collapsed {
+            width: 4rem;
+        }
+
+        .sidebar-expanded {
+            width: 16rem;
+        }
+
+        .content-shifted {
+            margin-left: 16rem;
+        }
+
+        .content-collapsed {
+            margin-left: 4rem;
+        }
+
+        @media (max-width: 768px) {
+
+            .content-shifted,
+            .content-collapsed {
+                margin-left: 0;
+            }
+        }
+
+        .theme-transition {
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+    </style>
+    <style>
+        @view-transition {
+            navigation: auto;
+        }
+    </style>
+    <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+    <script src="/_sdk/element_sdk.js" type="text/javascript"></script>
+</head>
+
+<body class="theme-transition" id="body"><!-- Mobile Header -->
+    <header
+        class="md:hidden fixed top-0 left-0 right-0 z-50 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 px-4 py-3"
+        id="mobile-header">
+        <div class="flex justify-between items-center">
+            <h1 class="text-lg font-bold text-gray-900 dark:text-white">UBD - Análise de Dados</h1><button
+                onclick="toggleTheme()"
+                class="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+                <span id="theme-icon-mobile">🌙</span> </button>
+        </div>
+    </header><!-- Sidebar for Tablet/Desktop -->
+    <aside
+        class="hidden md:flex fixed left-0 top-0 h-full bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-700 flex-col justify-between z-40 sidebar-expanded theme-transition"
+        id="sidebar">
+        <div><!-- Sidebar Header -->
+            <div class="p-4 border-b border-gray-200 dark:border-gray-700">
+                <div class="flex items-center justify-between">
+                    <h1 class="text-xl font-bold text-gray-900 dark:text-white sidebar-title">UBD - Análise de Dados
+                    </h1><button onclick="toggleSidebar()"
+                        class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-600 dark:text-gray-300 transition-colors">
+                        <span id="sidebar-toggle-icon">←</span> </button>
+                </div>
+            </div><!-- Navigation -->
+            <nav class="p-4">
+                <ul class="space-y-2">
+                    <li><button onclick="showPage('landing')"
+                            class="nav-item w-full flex items-center px-3 py-2 rounded-lg text-left hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300 transition-colors active"
+                            data-page="landing"> <span class="nav-icon">🏠</span> <span class="nav-text ml-3">Landing
+                                Page</span> </button></li>
+                    <li><button onclick="showPage('energia')"
+                            class="nav-item w-full flex items-center px-3 py-2 rounded-lg text-left hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300 transition-colors"
+                            data-page="energia"> <span class="nav-icon">🌞</span> <span class="nav-text ml-3">Dashboard
+                                Energia</span> </button></li>
+                    <li><button onclick="showPage('saude')"
+                            class="nav-item w-full flex items-center px-3 py-2 rounded-lg text-left hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300 transition-colors"
+                            data-page="saude"> <span class="nav-icon">🏥</span> <span class="nav-text ml-3">Dashboard
+                                Saúde</span> </button></li>
+                </ul>
+            </nav>
+        </div><!-- Theme Toggle -->
+        <div class="p-4 border-t border-gray-200 dark:border-gray-700"><button onclick="toggleTheme()"
+                class="w-full flex items-center px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300 transition-colors">
+                <span id="theme-icon-desktop">🌙</span> <span class="nav-text ml-3">Alternar Tema</span> </button>
+        </div>
+    </aside><!-- Main Content -->
+    <main class="content-shifted theme-transition pt-16 md:pt-0" id="main-content"><!-- Landing Page -->
+        <div id="page-landing" class="page-content min-h-screen"><!-- Hero Section -->
+            <section class="relative h-screen flex items-center justify-center overflow-hidden">
+                <div class="absolute inset-0 bg-cover bg-center bg-no-repeat filter blur-sm scale-110 z-0"
+                    style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.1.0&amp;auto=format&amp;fit=crop&amp;q=80&amp;w=1332');">
+                </div>
+                <div class="absolute inset-0 bg-black/75 z-10"></div>
+                <div class="relative z-20 text-center text-white max-w-4xl px-6">
+                    <h1
+                        class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent">
+                        Segunda Avaliação de UBD</h1>
+                    <p class="text-lg md:text-xl lg:text-2xl mb-8 opacity-90">Analisando a Eficiência de Painéis Solares
+                        e a Saúde Cardíaca</p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center"><button onclick="showPage('energia')"
+                            class="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-semibold py-4 px-8 rounded-full transition duration-300 transform hover:scale-105 shadow-lg">
+                            Dashboard Energia </button> <button onclick="showPage('saude')"
+                            class="border-2 border-white text-white hover:bg-white hover:text-gray-900 font-semibold py-4 px-8 rounded-full transition duration-300 transform hover:scale-105 shadow-lg">
+                            Dashboard Saúde </button>
+                    </div>
+                </div>
+            </section><!-- Content Grid -->
+            <div class="px-6 py-12 bg-white dark:bg-gray-900 theme-transition">
+                <!-- Mobile: 1 column, Tablet: 2 columns, Desktop: 3 columns -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto"><!-- Integrantes -->
+                    <div class="bg-gray-50 dark:bg-gray-800 rounded-lg p-6 theme-transition">
+                        <h2 class="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Integrantes</h2>
+                        <div class="space-y-3">
+                            <div class="bg-white dark:bg-gray-700 rounded-lg p-4 theme-transition">
+                                <h3 class="font-semibold text-gray-900 dark:text-white">Daniel Gomes</h3>
+                                <p class="text-gray-600 dark:text-gray-300">Backend Developer</p>
+                            </div>
+                            <div class="bg-white dark:bg-gray-700 rounded-lg p-4 theme-transition">
+                                <h3 class="font-semibold text-gray-900 dark:text-white">Davy Andrade</h3>
+                                <p class="text-gray-600 dark:text-gray-300">Frontend Developer</p>
+                            </div>
+                            <div class="bg-white dark:bg-gray-700 rounded-lg p-4 theme-transition">
+                                <h3 class="font-semibold text-gray-900 dark:text-white">Fellype Samuel</h3>
+                                <p class="text-gray-600 dark:text-gray-300">Fullstack &amp; Docs</p>
+                            </div>
+                        </div>
+                    </div><!-- Ferramentas -->
+                    <div class="bg-gray-50 dark:bg-gray-800 rounded-lg p-6 theme-transition">
+                        <h2 class="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Tecnologias</h2>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="bg-white dark:bg-gray-700 rounded-lg p-3 text-center theme-transition">
+                                <div class="text-2xl mb-1">
+                                    🐍
+                                </div>
+                                <p class="text-sm font-medium text-gray-900 dark:text-white">Python</p>
+                            </div>
+                            <div class="bg-white dark:bg-gray-700 rounded-lg p-3 text-center theme-transition">
+                                <div class="text-2xl mb-1">
+                                    ⚛️
+                                </div>
+                                <p class="text-sm font-medium text-gray-900 dark:text-white">React</p>
+                            </div>
+                            <div class="bg-white dark:bg-gray-700 rounded-lg p-3 text-center theme-transition">
+                                <div class="text-2xl mb-1">
+                                    🎯
+                                </div>
+                                <p class="text-sm font-medium text-gray-900 dark:text-white">Django</p>
+                            </div>
+                            <div class="bg-white dark:bg-gray-700 rounded-lg p-3 text-center theme-transition">
+                                <div class="text-2xl mb-1">
+                                    📊
+                                </div>
+                                <p class="text-sm font-medium text-gray-900 dark:text-white">Pandas</p>
+                            </div>
+                        </div>
+                    </div><!-- Minimundos -->
+                    <div
+                        class="bg-gray-50 dark:bg-gray-800 rounded-lg p-6 theme-transition md:col-span-2 lg:col-span-1">
+                        <h2 class="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Minimundos</h2>
+                        <div class="space-y-4">
+                            <div class="bg-white dark:bg-gray-700 rounded-lg p-4 theme-transition">
+                                <div class="flex items-center mb-2"><span class="text-2xl mr-2">🌞</span>
+                                    <h3 class="font-semibold text-gray-900 dark:text-white">Painéis Solares</h3>
+                                </div>
+                                <p class="text-sm text-gray-600 dark:text-gray-300 mb-3">Análise de eficiência
+                                    energética</p><button onclick="showPage('energia')"
+                                    class="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg transition-colors">
+                                    Ver Dashboard </button>
+                            </div>
+                            <div class="bg-white dark:bg-gray-700 rounded-lg p-4 theme-transition">
+                                <div class="flex items-center mb-2"><span class="text-2xl mr-2">🏥</span>
+                                    <h3 class="font-semibold text-gray-900 dark:text-white">Risco Cardíaco</h3>
+                                </div>
+                                <p class="text-sm text-gray-600 dark:text-gray-300 mb-3">Predição de riscos médicos</p>
+                                <button onclick="showPage('saude')"
+                                    class="w-full bg-purple-500 hover:bg-purple-600 text-white py-2 px-4 rounded-lg transition-colors">
+                                    Ver Dashboard </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- Dashboard Energia -->
+        <div id="page-energia" class="page-content min-h-screen bg-white dark:bg-gray-900 theme-transition hidden">
+            <div class="px-6 py-8">
+                <div class="max-w-7xl mx-auto">
+                    <div class="mb-8">
+                        <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">Dashboard - Painéis Solares
+                        </h1>
+                        <p class="text-gray-600 dark:text-gray-300">Análise de eficiência energética baseada em
+                            temperatura e radiação solar</p>
+                    </div><!-- Mobile: 1 column, Tablet: 2 columns, Desktop: 3 columns -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"><!-- Métricas -->
+                        <div class="bg-gray-50 dark:bg-gray-800 rounded-lg p-6 theme-transition">
+                            <h2 class="text-xl font-semibold mb-4 text-gray-900 dark:text-white">Métricas Principais
+                            </h2>
+                            <div class="space-y-4">
+                                <div class="bg-white dark:bg-gray-700 rounded-lg p-4 theme-transition">
+                                    <div class="flex items-center justify-between"><span
+                                            class="text-gray-600 dark:text-gray-300">Eficiência Média</span> <span
+                                            class="text-2xl font-bold text-blue-600 dark:text-blue-400">87.5%</span>
+                                    </div>
+                                </div>
+                                <div class="bg-white dark:bg-gray-700 rounded-lg p-4 theme-transition">
+                                    <div class="flex items-center justify-between"><span
+                                            class="text-gray-600 dark:text-gray-300">Potência Máxima</span> <span
+                                            class="text-2xl font-bold text-green-600 dark:text-green-400">4.2kW</span>
+                                    </div>
+                                </div>
+                                <div class="bg-white dark:bg-gray-700 rounded-lg p-4 theme-transition">
+                                    <div class="flex items-center justify-between"><span
+                                            class="text-gray-600 dark:text-gray-300">Temperatura Ótima</span> <span
+                                            class="text-2xl font-bold text-orange-600 dark:text-orange-400">25°C</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- Gráfico de Dispersão -->
+                        <div class="bg-gray-50 dark:bg-gray-800 rounded-lg p-6 theme-transition">
+                            <h2 class="text-xl font-semibold mb-4 text-gray-900 dark:text-white">Temperatura × Potência
+                            </h2>
+                            <div
+                                class="bg-white dark:bg-gray-700 rounded-lg p-4 h-64 flex items-center justify-center theme-transition">
+                                <div class="text-center text-gray-500 dark:text-gray-400">
+                                    <div class="text-4xl mb-2">
+                                        📊
+                                    </div>
+                                    <p>Gráfico de Dispersão</p>
+                                    <p class="text-sm">Correlação: -0.73</p>
+                                </div>
+                            </div>
+                        </div><!-- Mapa de Calor -->
+                        <div
+                            class="bg-gray-50 dark:bg-gray-800 rounded-lg p-6 theme-transition md:col-span-2 lg:col-span-1">
+                            <h2 class="text-xl font-semibold mb-4 text-gray-900 dark:text-white">Mapa de Calor</h2>
+                            <div
+                                class="bg-white dark:bg-gray-700 rounded-lg p-4 h-64 flex items-center justify-center theme-transition">
+                                <div class="text-center text-gray-500 dark:text-gray-400">
+                                    <div class="text-4xl mb-2">
+                                        🔥
+                                    </div>
+                                    <p>Hora × Eficiência</p>
+                                    <p class="text-sm">Pico: 12h-14h</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- Dashboard Saúde -->
+        <div id="page-saude" class="page-content min-h-screen bg-white dark:bg-gray-900 theme-transition hidden">
+            <div class="px-6 py-8">
+                <div class="max-w-7xl mx-auto">
+                    <div class="mb-8">
+                        <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">Dashboard - Risco Cardíaco
+                        </h1>
+                        <p class="text-gray-600 dark:text-gray-300">Predição de risco cardíaco baseada em fatores
+                            médicos</p>
+                    </div><!-- Mobile: 1 column, Tablet: 2 columns, Desktop: 3 columns -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"><!-- Estatísticas -->
+                        <div class="bg-gray-50 dark:bg-gray-800 rounded-lg p-6 theme-transition">
+                            <h2 class="text-xl font-semibold mb-4 text-gray-900 dark:text-white">Estatísticas</h2>
+                            <div class="space-y-4">
+                                <div class="bg-white dark:bg-gray-700 rounded-lg p-4 theme-transition">
+                                    <div class="flex items-center justify-between"><span
+                                            class="text-gray-600 dark:text-gray-300">Pacientes Analisados</span> <span
+                                            class="text-2xl font-bold text-blue-600 dark:text-blue-400">1,247</span>
+                                    </div>
+                                </div>
+                                <div class="bg-white dark:bg-gray-700 rounded-lg p-4 theme-transition">
+                                    <div class="flex items-center justify-between"><span
+                                            class="text-gray-600 dark:text-gray-300">Alto Risco</span> <span
+                                            class="text-2xl font-bold text-red-600 dark:text-red-400">23%</span>
+                                    </div>
+                                </div>
+                                <div class="bg-white dark:bg-gray-700 rounded-lg p-4 theme-transition">
+                                    <div class="flex items-center justify-between"><span
+                                            class="text-gray-600 dark:text-gray-300">Precisão do Modelo</span> <span
+                                            class="text-2xl font-bold text-green-600 dark:text-green-400">94.2%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- Correlação -->
+                        <div class="bg-gray-50 dark:bg-gray-800 rounded-lg p-6 theme-transition">
+                            <h2 class="text-xl font-semibold mb-4 text-gray-900 dark:text-white">Matriz de Correlação
+                            </h2>
+                            <div
+                                class="bg-white dark:bg-gray-700 rounded-lg p-4 h-64 flex items-center justify-center theme-transition">
+                                <div class="text-center text-gray-500 dark:text-gray-400">
+                                    <div class="text-4xl mb-2">
+                                        🔗
+                                    </div>
+                                    <p>Correlação entre Variáveis</p>
+                                    <p class="text-sm">Colesterol × Risco: 0.68</p>
+                                </div>
+                            </div>
+                        </div><!-- Distribuição -->
+                        <div
+                            class="bg-gray-50 dark:bg-gray-800 rounded-lg p-6 theme-transition md:col-span-2 lg:col-span-1">
+                            <h2 class="text-xl font-semibold mb-4 text-gray-900 dark:text-white">Distribuição por Idade
+                            </h2>
+                            <div
+                                class="bg-white dark:bg-gray-700 rounded-lg p-4 h-64 flex items-center justify-center theme-transition">
+                                <div class="text-center text-gray-500 dark:text-gray-400">
+                                    <div class="text-4xl mb-2">
+                                        📈
+                                    </div>
+                                    <p>Histograma de Idades</p>
+                                    <p class="text-sm">Média: 54.3 anos</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main><!-- Mobile Bottom Navigation -->
+    <nav class="md:hidden fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 z-50"
+        id="mobile-nav">
+        <div class="flex justify-around py-2"><button onclick="showPage('landing')"
+                class="mobile-nav-item flex flex-col items-center py-2 px-4 text-blue-600 dark:text-blue-400"
+                data-page="landing"> <span class="text-xl mb-1">🏠</span> <span class="text-xs">Home</span> </button>
+            <button onclick="showPage('energia')"
+                class="mobile-nav-item flex flex-col items-center py-2 px-4 text-gray-600 dark:text-gray-400"
+                data-page="energia"> <span class="text-xl mb-1">🌞</span> <span class="text-xs">Energia</span> </button>
+            <button onclick="showPage('saude')"
+                class="mobile-nav-item flex flex-col items-center py-2 px-4 text-gray-600 dark:text-gray-400"
+                data-page="saude"> <span class="text-xl mb-1">🏥</span> <span class="text-xs">Saúde</span> </button>
+        </div>
+    </nav>
+    <script>
+        // Theme Management
+        let isDarkMode = localStorage.getItem('darkMode') === 'true';
+
+        function initTheme() {
+            const body = document.getElementById('body');
+
+            if (isDarkMode) {
+                document.documentElement.classList.add('dark');
+                body.classList.remove('bg-white');
+                body.classList.add('bg-gray-900', 'text-white');
+                document.getElementById('theme-icon-mobile').textContent = '☀️';
+                document.getElementById('theme-icon-desktop').textContent = '☀️';
+            } else {
+                document.documentElement.classList.remove('dark');
+                body.classList.remove('bg-gray-900', 'text-white');
+                body.classList.add('bg-white');
+                document.getElementById('theme-icon-mobile').textContent = '🌙';
+                document.getElementById('theme-icon-desktop').textContent = '🌙';
+            }
+        }
+
+        function toggleTheme() {
+            isDarkMode = !isDarkMode;
+            localStorage.setItem('darkMode', isDarkMode);
+            initTheme();
+        }
+
+        // Sidebar Management
+        let sidebarCollapsed = localStorage.getItem('sidebarCollapsed') === 'true';
+
+        function initSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const mainContent = document.getElementById('main-content');
+            const toggleIcon = document.getElementById('sidebar-toggle-icon');
+
+            if (sidebarCollapsed) {
+                sidebar.classList.remove('sidebar-expanded');
+                sidebar.classList.add('sidebar-collapsed');
+                mainContent.classList.remove('content-shifted');
+                mainContent.classList.add('content-collapsed');
+                toggleIcon.textContent = '→';
+
+                // Hide text elements
+                document.querySelectorAll('.nav-text, .sidebar-title').forEach(el => {
+                    el.style.display = 'none';
+                });
+            } else {
+                sidebar.classList.remove('sidebar-collapsed');
+                sidebar.classList.add('sidebar-expanded');
+                mainContent.classList.remove('content-collapsed');
+                mainContent.classList.add('content-shifted');
+                toggleIcon.textContent = '←';
+
+                // Show text elements
+                document.querySelectorAll('.nav-text, .sidebar-title').forEach(el => {
+                    el.style.display = 'block';
+                });
+            }
+        }
+
+        function toggleSidebar() {
+            sidebarCollapsed = !sidebarCollapsed;
+            localStorage.setItem('sidebarCollapsed', sidebarCollapsed);
+            initSidebar();
+        }
+
+        // Page Navigation
+        let currentPage = localStorage.getItem('currentPage') || 'landing';
+
+        function showPage(pageName) {
+            // Hide all pages
+            document.querySelectorAll('.page-content').forEach(page => {
+                page.classList.add('hidden');
+            });
+
+            // Show selected page
+            document.getElementById(`page-${pageName}`).classList.remove('hidden');
+
+            // Update navigation states
+            updateNavigation(pageName);
+
+            // Save current page
+            currentPage = pageName;
+            localStorage.setItem('currentPage', currentPage);
+        }
+
+        function updateNavigation(activePage) {
+            // Update desktop navigation
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active', 'bg-blue-100', 'dark:bg-blue-900', 'text-blue-600', 'dark:text-blue-400');
+                if (item.dataset.page === activePage) {
+                    item.classList.add('active', 'bg-blue-100', 'dark:bg-blue-900', 'text-blue-600', 'dark:text-blue-400');
+                }
+            });
+
+            // Update mobile navigation
+            document.querySelectorAll('.mobile-nav-item').forEach(item => {
+                item.classList.remove('text-blue-600', 'dark:text-blue-400');
+                item.classList.add('text-gray-600', 'dark:text-gray-400');
+                if (item.dataset.page === activePage) {
+                    item.classList.remove('text-gray-600', 'dark:text-gray-400');
+                    item.classList.add('text-blue-600', 'dark:text-blue-400');
+                }
+            });
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function () {
+            initTheme();
+            initSidebar();
+            showPage(currentPage);
+        });
+
+        // Handle window resize
+        window.addEventListener('resize', function () {
+            if (window.innerWidth < 768) {
+                // Mobile view - reset sidebar
+                const mainContent = document.getElementById('main-content');
+                mainContent.classList.remove('content-shifted', 'content-collapsed');
+            } else {
+                // Desktop/tablet view - restore sidebar state
+                initSidebar();
+            }
+        });
+    </script>
+    <script>(function () { function c() { var b = a.contentDocument || a.contentWindow.document; if (b) { var d = b.createElement('script'); d.innerHTML = "window.__CF$cv$params={r:'99e9ab3732e1cac7',t:'MTc2MzE1NjQ0Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);"; b.getElementsByTagName('head')[0].appendChild(d) } } if (document.body) { var a = document.createElement('iframe'); a.height = 1; a.width = 1; a.style.position = 'absolute'; a.style.top = 0; a.style.left = 0; a.style.border = 'none'; a.style.visibility = 'hidden'; document.body.appendChild(a); if ('loading' !== document.readyState) c(); else if (window.addEventListener) document.addEventListener('DOMContentLoaded', c); else { var e = document.onreadystatechange || function () { }; document.onreadystatechange = function (b) { e(b); 'loading' !== document.readyState && (document.onreadystatechange = e, c()) } } } })();</script>
+</body>
+
+</html>

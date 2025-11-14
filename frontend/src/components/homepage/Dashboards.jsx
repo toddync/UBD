@@ -16,7 +16,7 @@ export default function Dashboards() {
         dashboards desenvolvidos.
       </p>
 
-      <div className="flex flex-col justify-center w-full md:grid md:grid-cols-2 gap-6 max-w-xl mx-auto">
+      <div className="flex flex-col justify-center w-full md:grid md:grid-cols-2 gap-6 max-w-3xl mx-auto">
         <DashboardCard
           icon={FlashOnIcon}
           title="Painéis Solares"
@@ -25,7 +25,7 @@ export default function Dashboards() {
         />
         <DashboardCard
           icon={HeartIcon}
-          title="Saúde"
+          title="Risco Cardíaco"
           link="/saude"
           color="from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700"
         />
@@ -38,11 +38,11 @@ function DashboardCard({ icon, title, link, color }) {
   return (
     <Link to={link}>
       <article
-        className={`flex flex-col justify-center items-center bg-gradient-to-r ${color} p-6 rounded-lg shadow-md text-white gap-3 hover:scale-105 focus:scale-105 transition-transform`}
+        className={`flex flex-col justify-center items-center bg-gradient-to-r ${color} p-5 rounded-lg shadow-md text-white gap-3 hover:scale-105 focus:scale-105 transition-transform`}
         tabIndex={0}
       >
         <span>
-          <img src={icon} alt={title} className="w-12 h-12" />
+          <img src={icon} alt={title} className="w-10 h-10" />
         </span>
         <h3 className="text-2xl font-semibold">{title}</h3>
       </article>
