@@ -51,12 +51,12 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',  # ← CORS precisa vir ANTES do CommonMiddleware
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    "corsheaders.middleware.CorsMiddleware"
 ]
 
 ROOT_URLCONF = 'backend.urls'
@@ -131,5 +131,22 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CORS_ALLOW_ALL_ORIGINS = True
-CORS_ALLOWS_CREDENTIALS = True
+# Configuração CORS - Permite requisições do frontend React
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",  # Vite dev server (React)
+    "http://127.0.0.1:5173",
+]
+
+# Alternativa para desenvolvimento (menos segura, mas mais flexível)
+# CORS_ALLOW_ALL_ORIGINS = True  # Descomente se tiver problemas com origens específicas
+
+# Configuração do Django REST Framework
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',  # Interface web para testar API
+    ],
+    'DEFAULT_PARSER_CLASSES': [
+        'rest_framework.parsers.JSONParser',
+    ],
+}
