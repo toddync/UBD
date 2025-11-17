@@ -277,8 +277,5 @@ pyrightconfig.json
 ### VisualStudioCode Patch ###
 # Ignore all local history of files
 .history
-<<<<<<< HEAD
 .ionide
-=======
-.ionide
->>>>>>> 6bb39ee0d11cd4478c179dc349f5f3b486eb9dd4
+.vscode
