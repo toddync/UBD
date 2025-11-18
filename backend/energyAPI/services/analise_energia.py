@@ -2,7 +2,7 @@ import pandas as pd
 from pathlib import Path
 
 # Obter caminho dos dados 
-BASE_DIR = Path(__file__).resolve().parent.parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent.parent  # Subir 4 níveis: services -> energyAPI -> backend -> UBD
 DATA_PATH = BASE_DIR / 'dados' / 'painel_solar.csv'
 
 def calcular_rendimento():
