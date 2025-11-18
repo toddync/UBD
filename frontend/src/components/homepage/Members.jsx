@@ -27,12 +27,12 @@ export default function Members() {
 
 function MemberCard({ name, role }) {
   return (
-    <div
-      className="bg-secondary rounded-lg p-6 m-4 w-64 text-center transform hover:scale-105 focus:scale-105 transition-transform"
+    <article
+      className="bg-secondary rounded-lg p-6 m-4 w-64 text-center transform hover:scale-105 focus:scale-105 transition-transform shadow-xl"
       tabIndex={0}
     >
       <h3 className="text-xl font-semibold mb-2 text-primary">{name}</h3>
       <p className="text-muted">{role}</p>
-    </div>
+    </article>
   );
 }

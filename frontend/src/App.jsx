@@ -1,22 +1,22 @@
-import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import "./app.css";
 
 /* Layout */
-import Header from "./components/layout/Header";
-import Sidebar from "./components/layout/Sidebar";
 import BottomNavigationBar from "./components/layout/BottomNavigationBar";
+import Header from "./components/layout/Header";
 
 /* Páginas */
-import Home from "./pages/Home";
-import Energia from "./pages/Energia";
-import Saude from "./pages/Saude";
 import { ThemeProvider } from "./contexts/ThemeContext";
+import Energia from "./pages/Energia";
+import Home from "./pages/Home";
+import Saude from "./pages/Saude";
+import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
   return (
     <ThemeProvider>
       <Router>
+        <ScrollToTop />
         <Header />
 
         <Routes>
