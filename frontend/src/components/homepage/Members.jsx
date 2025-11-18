@@ -11,10 +11,10 @@ export default function Members() {
 
   return (
     <section
-      className="flex flex-col items-center w-full py-20 text-white bg-gray-900 max-w-4xl mx-auto"
+      className="flex flex-col items-center w-full py-20 text-white bg-primary max-w-4xl mx-auto"
       id="membros"
     >
-      <h2 className="text-3xl font-bold mb-8">Integrantes</h2>
+      <h2 className="text-3xl font-bold mb-8 text-primary">Integrantes</h2>
 
       <div className="flex flex-wrap justify-center">
         {members.map((member, index) => (
@@ -28,11 +28,11 @@ export default function Members() {
 function MemberCard({ name, role }) {
   return (
     <div
-      className="bg-gray-800 rounded-lg p-6 m-4 w-64 text-center transform hover:scale-105 focus:scale-105 transition-transform"
+      className="bg-secondary rounded-lg p-6 m-4 w-64 text-center transform hover:scale-105 focus:scale-105 transition-transform"
       tabIndex={0}
     >
-      <h3 className="text-xl font-semibold mb-2">{name}</h3>
-      <p className="text-gray-400">{role}</p>
+      <h3 className="text-xl font-semibold mb-2 text-primary">{name}</h3>
+      <p className="text-muted">{role}</p>
     </div>
   );
 }

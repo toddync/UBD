@@ -1,1 +1,63 @@
 @import "tailwindcss";
+
+:root {
+  --bg-primary: oklch(98.5% 0.002 247.839); /* Gray-50 */
+  --bg-secondary: oklch(96.7% 0.003 264.542); /* Gray-100 */
+  --bg-tertiary: oklch(92.8% 0.006 264.531); /* Gray-200 */
+  --text-primary: oklch(13% 0.028 261.692); /* Gray-950 */
+  --text-muted: oklch(44.6% 0.03 256.802); /* Gray-600 */
+  --border-highlight: oklch(50% 0 0);
+  --border: oklch(90% 0 0);
+  --border-muted: oklch(80% 0 0);
+}
+
+[data-theme="dark"] {
+  --bg-primary: oklch(13% 0.028 261.692); /* Gray-950 */
+  --bg-secondary: oklch(21% 0.034 264.665); /* Gray-900 */
+  --bg-tertiary: oklch(27.8% 0.033 256.848); /* Gray-800 */
+  --text-primary: oklch(98.5% 0.002 247.839); /* Gray-50 */
+  --text-muted: oklch(70.7% 0.022 261.325); /* Gray-400 */
+  --border-highlight: oklch(10% 0 0);
+  --border: oklch(20% 0 0);
+  --border-muted: oklch(15% 0 0);
+}
+
+.bg-primary {
+  background-color: var(--bg-primary);
+  transition: background-color 0.3s ease;
+}
+
+.bg-secondary {
+  background-color: var(--bg-secondary);
+  transition: background-color 0.3s ease;
+}
+
+.bg-tertiary {
+  background-color: var(--bg-tertiary);
+  transition: background-color 0.3s ease;
+}
+
+.text-primary {
+  color: var(--text-primary);
+  transition: color 0.3s ease;
+}
+
+.text-muted {
+  color: var(--text-muted);
+  transition: color 0.3s ease;
+}
+
+.border-highlight {
+  border-color: var(--border-highlight);
+  transition: border-color 0.3s ease;
+}
+
+.border {
+  border-color: var(--border);
+  transition: border-color 0.3s ease;
+}
+
+.border-muted {
+  border-color: var(--border-muted);
+  transition: border-color 0.3s ease;
+}

@@ -1,6 +1,8 @@
 import React from "react";
-import ContrastIcon from "../../assets/icons/contrast.svg";
+import LightModeIcon from "../../assets/icons/light-mode.svg";
+import DarkModeIcon from "../../assets/icons/dark-mode.svg";
 import { Link } from "react-router-dom";
+import { useTheme } from "../../hooks/useTheme";
 
 export default function Header() {
   return (
@@ -11,9 +13,22 @@ export default function Header() {
       >
         Atividade AV2
       </Link>
-      <button className="text-white">
-        <img src={ContrastIcon} alt="Toggle Contrast" className="h-6 w-6" />
-      </button>
+      <ThemeToggle />
     </header>
+  );
+}
+
+function ThemeToggle() {
+  const { isDark, toggleTheme } = useTheme();
+
+  return (
+    <button onClick={toggleTheme} className="text-white">
+      <img
+        src={isDark ? DarkModeIcon : LightModeIcon}
+        alt={isDark ? "Dark Mode" : "Light Mode"}
+        className="h-6 w-6"
+        title={`Mudar para tema ${isDark ? "claro" : "escuro"}`}
+      />
+    </button>
   );
 }

@@ -7,7 +7,7 @@ import Dashboards from "../components/homepage/Dashboards";
 
 export default function Home() {
   return (
-    <main className="main flex flex-col justify-center items-center w-full bg-gray-900">
+    <main className="main flex flex-col justify-center items-center w-full bg-primary">
       <Hero />
       <Members />
       <Tools />

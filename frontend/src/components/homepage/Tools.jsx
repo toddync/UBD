@@ -34,14 +34,14 @@ export default function Tools() {
 
   return (
     <section
-      className="flex flex-col items-center min-h-screen w-full px-6 py-20 text-white bg-gray-800"
+      className="flex flex-col items-center min-h-screen w-full px-6 py-20 bg-secondary"
       id="ferramentas"
     >
-      <h2 className="text-3xl font-bold mb-8 text-left w-full md:text-center">
+      <h2 className="text-3xl font-bold mb-8 text-left w-full md:text-center text-primary">
         Ferramentas Utilizadas
       </h2>
 
-      <div className="flex flex-col w-full gap-8 max-w-5xl mx-auto">
+      <div className="flex flex-col w-full gap-8 max-w-4xl xl:max-w-5xl mx-auto">
         <ToolBox
           name="Backend"
           titleColor="text-blue-400"
@@ -79,11 +79,11 @@ function ToolBox({ name, titleColor, toolList }) {
 function ToolItem({ icon, name }) {
   return (
     <div
-      className="flex flex-col items-center gap-3 bg-gray-700 rounded-lg p-4 lg:justify-center transform hover:scale-105 focus:scale-105 transition-transform"
+      className="flex flex-col items-center gap-3 bg-tertiary rounded-lg p-4 lg:justify-center transform hover:scale-105 focus:scale-105 transition-transform"
       tabIndex={0}
     >
       <img src={icon} alt={`${name} icon`} className="w-10 h-10" />
-      <span className="text-lg">{name}</span>
+      <span className="text-lg text-primary">{name}</span>
     </div>
   );
 }

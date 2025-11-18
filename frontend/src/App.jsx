@@ -11,10 +11,11 @@ import BottomNavigationBar from "./components/layout/BottomNavigationBar";
 import Home from "./pages/Home";
 import Energia from "./pages/Energia";
 import Saude from "./pages/Saude";
+import { ThemeProvider } from "./contexts/ThemeContext";
 
 function App() {
   return (
-    <>
+    <ThemeProvider>
       <Router>
         <Header />
 
@@ -27,7 +28,7 @@ function App() {
 
         <BottomNavigationBar />
       </Router>
-    </>
+    </ThemeProvider>
   );
 }
 

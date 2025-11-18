@@ -31,12 +31,12 @@ export default function Minimundos() {
 
   return (
     <section
-      className="flex flex-col items-center w-full px-6 py-20 bg-gray-900 md:h-auto gap-8"
+      className="flex flex-col items-center w-full px-6 py-20 bg-primary md:h-auto gap-8"
       id="minimundos"
     >
-      <h2 className="text-3xl font-bold text-white">Minimundos</h2>
+      <h2 className="text-3xl font-bold text-primary">Minimundos</h2>
 
-      <div className="flex flex-col items-center w-full gap-8 md:grid md:grid-cols-2 max-w-5xl mx-auto">
+      <div className="flex flex-col items-center w-full gap-8 md:grid md:grid-cols-2 max-w-4xl xl:max-w-5xl mx-auto">
         {miniWorlds.map((miniWorld, index) => (
           <MiniWorldCard
             key={index}
@@ -64,16 +64,16 @@ function MiniWorldCard({
   titleColor,
 }) {
   return (
-    <article className="flex flex-col justify-between gap-4 bg-gray-800 rounded-lg shadow-lg overflow-hidden p-6 w-full h-full">
+    <article className="flex flex-col justify-between gap-4 bg-secondary rounded-lg shadow-xl overflow-hidden p-6 w-full h-full">
       <img
         src={imageUrl}
         alt={title}
         className="w-full h-48 object-cover mb-3"
       />
       <h3 className={`text-2xl font-bold mb-2 ${titleColor}`}>{title}</h3>
-      <p className="text-gray-50 font-semibold text-xl">{subtitle}</p>
+      <p className="text-primary font-semibold text-xl">{subtitle}</p>
 
-      <p className="text-gray-300 mb-3">{description}</p>
+      <p className="text-muted mb-3">{description}</p>
 
       <Button
         title="Ver Notebook 💻"

@@ -6,12 +6,14 @@ import { Link } from "react-router-dom";
 export default function Dashboards() {
   return (
     <section
-      className="flex flex-col justify-center items-center w-full px-6 py-20 bg-black gap-6"
+      className="flex flex-col justify-center items-center w-full px-6 py-20 bg-secondary gap-6"
       id="dashboards"
     >
-      <h2 className="text-3xl font-bold text-white">Dashboards Interativos</h2>
+      <h2 className="text-3xl font-bold text-primary">
+        Dashboards Interativos
+      </h2>
 
-      <p className="text-xl text-gray-300 mb-4 text-center max-w-xl">
+      <p className="text-xl text-muted mb-4 text-center max-w-xl">
         Explore as visualizações interativas dos nossos minimundos através dos
         dashboards desenvolvidos.
       </p>

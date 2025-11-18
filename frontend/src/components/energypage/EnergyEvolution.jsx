@@ -1,13 +1,13 @@
 export default function EnergyEvolution() {
   return (
-    <section className="grid auto-rows-auto text-white p-6 bg-gray-800 rounded-lg gap-4">
+    <section className="grid auto-rows-auto text-primary p-6 bg-secondary rounded-lg gap-4">
       <h2 className="text-xl font-semibold">
         Evolução da Eficiência ao Longo do Dia
       </h2>
 
-      <div className="bg-gray-700 p-4 rounded-lg h-64 flex flex-col items-center justify-center text-center gap-2">
+      <div className="bg-tertiary p-4 rounded-lg h-64 flex flex-col items-center justify-center text-center gap-2">
         <span className="text-4xl">📊</span>
-        <p className="text-sm text-white/70">Gráfico será exibido aqui.</p>
+        <p className="text-sm text-muted">Gráfico será exibido aqui.</p>
       </div>
     </section>
   );

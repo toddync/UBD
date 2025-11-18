@@ -27,7 +27,7 @@ export default function EnergySummary() {
   ];
 
   return (
-    <section className="grid grid-cols-1 auto-rows-auto bg-gray-800 text-white p-6 rounded-lg gap-4">
+    <section className="grid grid-cols-1 auto-rows-auto bg-secondary p-6 rounded-lg gap-4">
       <h2 className="text-xl font-semibold">Métricas Principais</h2>
 
       <div className="grid grid-cols-1 gap-4">
@@ -47,9 +47,9 @@ export default function EnergySummary() {
 function MetricCard({ title, value, color }) {
   return (
     <article
-      className={`p-4 rounded-lg text-white flex justify-between gap-2 bg-gray-700 items-center`}
+      className={`p-4 rounded-lg flex justify-between gap-2 bg-tertiary items-center`}
     >
-      <h3 className="text-white/70">{title}</h3>
+      <h3 className="text-muted">{title}</h3>
       <p className={`text-2xl font-bold ${color}`}>{value}</p>
     </article>
   );
