@@ -33,8 +33,12 @@ def calcular_rendimento():
         'dados_grafico_dispersao': {
             'temperatura': df['temperatura_c'].tolist(),
             'potencia': df['potencia_kw'].tolist(),
+        },
+        'dados_mapa_calor': {
+            'horas': df['hora'].tolist(),
+            'eficiencia': df['percentual_rendimento'].round(2).tolist(),
         }
-    }    
+    }
     
     return resultado
 
