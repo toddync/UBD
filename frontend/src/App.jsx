@@ -22,14 +22,14 @@ function App() {
           <Sidebar />
           <div className="flex-1 flex flex-col min-w-0">
             <Header />
-            <main className="flex-1 pt-16 lg:pt-0">
+            <div className="">
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/home" element={<Home />} />
                 <Route path="/energia" element={<Energia />} />
                 <Route path="/saude" element={<Saude />} />
               </Routes>
-            </main>
+            </div>
             <BottomNavigationBar />
           </div>
         </div>
