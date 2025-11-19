@@ -87,13 +87,35 @@
 .energy__secondary {
   display: grid;
   grid-template-columns: 1fr;
+  grid-template-areas: "em" 
+                       "ee";  /* ****** */
+  gap: 1rem;
 }
 
-@media screen and (min-width: 1440px) {
+/* Classes para o grid */
+.energy__metrics {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-area: em;
+  gap: 1rem;
+}
+
+.energy__evolution {
+  grid-area: ee;
+}
+
+/* DeskTop */
+@media screen and (min-width: 1440px) { 
   .energy__main {
     grid-template-columns: 1fr 1fr;
     grid-template-areas:
       "aph aph"
       "sp hm";
   }
+
+  .energy__secondary {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: "em ee";
+  }
 }
+
