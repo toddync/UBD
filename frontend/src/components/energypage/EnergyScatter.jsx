@@ -260,7 +260,7 @@ export default function EnergyScatter() {
   return (
     <article className="bg-tertiary p-4 rounded-lg energy__scatter">
       <h3 className="text-xl font-semibold mb-4">Temperatura vs Potência</h3>
-      <div ref={chartRef} className="w-full h-full min-h-[300px]"></div>
+      <div ref={chartRef} className="w-full h-full"></div>
     </article>
   );
 }

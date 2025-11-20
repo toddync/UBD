@@ -105,6 +105,28 @@
   grid-area: ee;
 }
 
+.health__main {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  grid-template-areas:
+    "cor"
+    "sp"
+    "hm";
+}
+
+.health__correlation {
+  grid-area: cor;
+}
+
+.health__scatter {
+  grid-area: sp;
+}
+
+.health__heat-map {
+  grid-area: hm;
+}
+
 /* Desktop */
 @media screen and (min-width: 1440px) {
   .energy__main {
