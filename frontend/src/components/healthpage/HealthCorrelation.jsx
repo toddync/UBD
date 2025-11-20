@@ -43,7 +43,7 @@ export default function HealthCorrelation() {
     const margin = { top: 80, right: 40, bottom: 40, left: 80 };
     const cellSize = Math.min(
       (containerWidth - margin.left - margin.right) / n,
-      60
+      80 // Increased from 60 to 80 for larger cells
     );
     const width = cellSize * n;
     const height = cellSize * n;
@@ -85,13 +85,13 @@ export default function HealthCorrelation() {
       .scaleBand()
       .domain(variables)
       .range([0, width])
-      .padding(0.05);
+      .padding(0.1); // Increased padding for more spacing between blocks
 
     const yScale = d3
       .scaleBand()
       .domain(variables)
       .range([0, height])
-      .padding(0.05);
+      .padding(0.1); // Increased padding for more spacing between blocks
 
     // Prepare data for cells
     const cellData = [];
@@ -207,7 +207,7 @@ export default function HealthCorrelation() {
       .attr("font-weight", "600")
       .text((d) => d.charAt(0).toUpperCase() + d.slice(1));
 
-    // Add Y axis labels (left)
+    // Add Y axis labels (left) - vertical orientation
     g.selectAll(".y-label")
       .data(variables)
       .enter()
@@ -215,11 +215,16 @@ export default function HealthCorrelation() {
       .attr("class", "y-label")
       .attr("x", -10)
       .attr("y", (d) => yScale(d) + yScale.bandwidth() / 2)
-      .attr("text-anchor", "end")
+      .attr("text-anchor", "middle")
       .attr("dominant-baseline", "middle")
       .attr("fill", textPrimaryColor)
       .attr("font-size", "14px")
       .attr("font-weight", "600")
+      .attr("transform", (d) => {
+        const x = -10;
+        const y = yScale(d) + yScale.bandwidth() / 2;
+        return `rotate(-90, ${x}, ${y})`;
+      })
       .text((d) => d.charAt(0).toUpperCase() + d.slice(1));
   }, [data]);
 
@@ -290,8 +295,8 @@ export default function HealthCorrelation() {
   }
 
   return (
-    <article className="bg-tertiary p-6 rounded-lg h-full">
-      <h3 className="text-xl font-medium mb-4">
+    <article className="flex flex-col bg-tertiary p-6 rounded-lg h-full">
+      <h3 className="text-xl font-medium">
         Matriz de Correlação entre Variáveis
       </h3>
       <div ref={chartRef}></div>
