@@ -10,6 +10,7 @@ import TailwindIcon from "../../assets/icons/tailwind.svg";
 import ViteIcon from "../../assets/icons/vite.svg";
 import JupyterIcon from "../../assets/icons/jupyter.svg";
 import CsvIcon from "../../assets/icons/csv.svg";
+import D3jsIcon from "../../assets/icons/d3js.svg";
 
 export default function Tools() {
   const backendTools = [
@@ -25,6 +26,7 @@ export default function Tools() {
     { name: "React", icon: ReactIcon },
     { name: "Tailwind CSS", icon: TailwindIcon },
     { name: "Vite", icon: ViteIcon },
+    { name: "D3.js", icon: D3jsIcon },
   ];
 
   const dataTools = [
