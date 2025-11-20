@@ -1,18 +1,46 @@
 import { useEffect, useState } from "react";
 
 export default function EnergyMetrics() {
-  const [data, setData] = useState(null);
+  const [metrics, setMetrics] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch("http://localhost:8000/api/energia/rendimento/")
+    fetch("http://localhost:8000/api/energia/dados/")
       .then((response) => {
         if (!response.ok) throw new Error("Erro ao carregar dados");
         return response.json();
       })
       .then((jsonData) => {
-        setData(jsonData);
+        // Calculate metrics from the data
+        const dados = jsonData.dados_completos;
+
+        // Calculate average efficiency
+        const rendimentoMedio =
+          dados.reduce((acc, item) => acc + item.percentual_rendimento, 0) /
+          dados.length;
+
+        // Find max efficiency and its time
+        const maxRendimento = dados.reduce((max, item) =>
+          item.percentual_rendimento > max.percentual_rendimento ? item : max
+        );
+
+        // Find min efficiency and its time
+        const minRendimento = dados.reduce((min, item) =>
+          item.percentual_rendimento < min.percentual_rendimento ? item : min
+        );
+
+        // Find max power and its time
+        const maxPotencia = dados.reduce((max, item) =>
+          item.potencia_kw > max.potencia_kw ? item : max
+        );
+
+        setMetrics({
+          rendimentoMedio,
+          maxRendimento,
+          minRendimento,
+          maxPotencia,
+        });
         setLoading(false);
       })
       .catch((err) => {
@@ -41,60 +69,67 @@ export default function EnergyMetrics() {
     );
   }
 
-  const metrics = [
+  const metricsData = [
     {
       id: 0,
       title: "Rendimento médio total",
-      value: `${data.estatisticas.rendimento_medio.toFixed(2)}%`,
+      mainValue: `${metrics.rendimentoMedio.toFixed(2)}%`,
+      complementValue: null,
       color: "text-blue-500",
-      icon: "📊",
     },
     {
       id: 1,
       title: "Rendimento máximo",
-      value: `${data.estatisticas.rendimento_maximo.toFixed(2)}%`,
+      mainValue: `${metrics.maxRendimento.percentual_rendimento.toFixed(2)}%`,
+      complementValue: `às ${metrics.maxRendimento.hora}h`,
       color: "text-green-400",
-      icon: "⬆️",
     },
     {
       id: 2,
       title: "Rendimento mínimo",
-      value: `${data.estatisticas.hora_pico}h`,
+      mainValue: `${metrics.minRendimento.percentual_rendimento.toFixed(2)}%`,
+      complementValue: `às ${metrics.minRendimento.hora}h`,
       color: "text-yellow-400",
-      icon: "🌞",
     },
     {
       id: 3,
       title: "Potência Máxima",
-      value: `${data.estatisticas.potencia_max.toFixed(1)} kW às ${
-        data.estatisticas.hora_pico
-      }h`,
+      mainValue: `${metrics.maxPotencia.potencia_kw.toFixed(1)} kW`,
+      complementValue: `às ${metrics.maxPotencia.hora}h`,
       color: "text-red-400",
-      icon: "⚡",
     },
   ];
 
   return (
     <div className="energy__metrics">
-      {metrics.map((metric) => (
+      {metricsData.map((metric) => (
         <MetricCard
           key={metric.id}
           title={metric.title}
-          value={metric.value}
+          mainValue={metric.mainValue}
+          complementValue={metric.complementValue}
           color={metric.color}
-          icon={metric.icon}
         />
       ))}
     </div>
   );
 }
 
-function MetricCard({ title, value, color }) {
+function MetricCard({ title, mainValue, complementValue, color }) {
   return (
     <article className="p-4 rounded-lg bg-tertiary items-center">
-      <div className="flex flex-col justify-between lg:flex-row lg:justify-between lg:items-center h-full gap-1">
-        <h3 className="text-muted text-sm xl:text-base">{title}</h3>
-        <p className={`text-xl font-bold ${color}`}>{value}</p>
+      <div className="flex flex-col justify-around lg:flex-row lg:justify-between lg:items-center h-full gap-1">
+        <h3 className="text-primary text-sm xl:text-base">{title}</h3>
+        <div className="flex items-baseline gap-2">
+          <p className={`text-xl font-bold ${color} xl:text-2xl`}>
+            {mainValue}
+          </p>
+          {complementValue && (
+            <span className="hidden text-sm text-muted sm:block">
+              {complementValue}
+            </span>
+          )}
+        </div>
       </div>
     </article>
   );

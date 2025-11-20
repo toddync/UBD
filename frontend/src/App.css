@@ -105,17 +105,17 @@
   grid-area: ee;
 }
 
-/* DeskTop */
+/* Desktop */
 @media screen and (min-width: 1440px) {
   .energy__main {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 2fr 1fr;
     grid-template-areas:
       "aph aph"
-      "sp hm";
+      "hm sp";
   }
 
   .energy__secondary {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 2fr;
     grid-template-areas: "em ee";
   }
 

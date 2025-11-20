@@ -29,7 +29,7 @@ export default function EnergyHeatMap() {
     // Limpa gráfico anterior
     d3.select(chartRef.current).selectAll("*").remove();
 
-    const margin = { top: 40, right: 100, bottom: 60, left: 80 };
+    const margin = { top: 40, right: 100, bottom: 60, left: 50 };
     const containerWidth = chartRef.current.offsetWidth;
     const width = containerWidth - margin.left - margin.right;
     const height = 300 - margin.top - margin.bottom;
@@ -141,7 +141,10 @@ export default function EnergyHeatMap() {
       .attr("color", textMutedColor)
       .selectAll("text")
       .style("font-size", "12px")
-      .attr("fill", textMutedColor);
+      .attr("fill", textMutedColor)
+      .attr("transform", "rotate(-90)")
+      .attr("text-anchor", "middle")
+      .attr("dy", "-2.5em");
 
     // X axis label
     g.append("text")
