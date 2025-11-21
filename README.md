@@ -1,197 +1,143 @@
-# UBD - Projeto de Análise de Dados
+# UBD - Data Visualization Dashboard
 
-Um projeto full-stack que combina análise de dados com Django (backend) e React (frontend), desenvolvido para estudos de ciência de dados e desenvolvimento web.
+Este projeto é uma aplicação full-stack para visualização de dados, focada em análises de Energia Solar e Saúde Cardíaca. O sistema utiliza um backend em Django para processamento de dados e uma interface moderna em React com visualizações interativas em D3.js.
 
-## 📋 Descrição
+## 🚀 Tecnologias Utilizadas
 
-Este projeto contém duas análises principais de dados:
+### Backend
 
-### 🌞 Minimundo 13 - Análise de Eficiência de Painéis Solares
+- **Python**
+- **Django & Django REST Framework**: API RESTful.
+- **Pandas & NumPy**: Manipulação e análise de dados.
+- **Scikit-learn**: Processamento de dados e machine learning.
+- **Matplotlib & Seaborn**: Geração de gráficos estáticos (usados em notebooks/análises).
 
-Análise do desempenho de painéis solares com base na temperatura e radiação solar, incluindo:
+### Frontend
 
-- Cálculo de rendimento médio por hora
-- Gráfico de dispersão (temperatura × potência)
-- Mapa de calor (hora × eficiência)
+- **React**: Biblioteca para construção de interfaces.
+- **Vite**: Build tool rápida e leve.
+- **TailwindCSS**: Framework CSS utilitário para estilização.
+- **D3.js**: Biblioteca para visualizações de dados dinâmicas e interativas.
+- **React Router DOM**: Gerenciamento de rotas.
 
-### 🏥 Minimundo 15 - Análise de Risco Cardíaco
+## 📂 Estrutura do Projeto
 
-Predição de risco cardíaco em pacientes baseada em fatores como pressão arterial, colesterol e idade:
-
-- Análise de correlação entre variáveis
-- Visualizações de dispersão
-- Mapas de calor de correlação
-
-## 🏗️ Estrutura do Projeto
+A estrutura de diretórios do projeto está organizada da seguinte forma:
 
 ```
 UBD/
-├── backend/                    # API Django
-│   ├── manage.py
-│   ├── requirements.txt
-│   └── backend/
-│       ├── settings.py
-│       ├── urls.py
-│       └── ...
-├── frontend/                   # Interface React + Vite
+├── backend/                 # Backend Django
+│   ├── backend/             # Configurações principais do projeto Django
+│   ├── energyAPI/           # App responsável pelos dados de Energia Solar
+│   │   ├── views.py         # Lógica dos endpoints de energia
+│   │   └── urls.py          # Rotas da API de energia
+│   ├── heartAPI/            # App responsável pelos dados de Saúde Cardíaca
+│   │   ├── views.py         # Lógica dos endpoints de saúde
+│   │   └── urls.py          # Rotas da API de saúde
+│   ├── manage.py            # Script de gerenciamento do Django
+│   └── requirements.txt     # Lista de dependências Python
+│
+├── frontend/                # Frontend React + Vite
 │   ├── src/
-│   │   ├── App.jsx
-│   │   └── ...
-│   ├── package.json
-│   └── vite.config.js
-├── dados/                      # Datasets
-│   ├── painel_solar.csv       # Dados de eficiência solar
-│   └── risco_cardiaco.csv     # Dados médicos
-├── env/                        # Ambiente virtual Python
-├── 13.ipynb                    # Notebook - Análise Solar
-├── 15.ipynb                    # Notebook - Análise Cardíaca
-└── README.md
+│   │   ├── components/      # Componentes da UI
+│   │   │   ├── energypage/  # Componentes específicos da página de Energia
+│   │   │   ├── healthpage/  # Componentes específicos da página de Saúde
+│   │   │   └── layout/      # Componentes estruturais (Header, Sidebar, etc.)
+│   │   ├── config/          # Configurações globais (ex: constantes)
+│   │   ├── contexts/        # Contextos do React (ex: ThemeContext)
+│   │   ├── hooks/           # Custom Hooks (ex: useApiData, useD3Chart)
+│   │   ├── pages/           # Páginas principais (Home, Energia, Saude)
+│   │   ├── utils/           # Funções utilitárias (ex: d3Utils)
+│   │   ├── App.jsx          # Configuração de rotas e layout principal
+│   │   └── main.jsx         # Ponto de entrada da aplicação React
+│   ├── package.json         # Dependências e scripts do Node.js
+│   └── vite.config.js       # Configuração do Vite
+│
+├── dados/                   # Diretório para armazenamento de datasets brutos
+├── *.ipynb                  # Jupyter Notebooks para análise exploratória e prototipagem
+└── run_project.bat          # Script para configuração e execução automática (Windows)
 ```
 
-## 🛠️ Tecnologias Utilizadas
+## 🛠️ Pré-requisitos
 
-### Backend
+Certifique-se de ter instalado em sua máquina:
 
-- **Python 3.x**
-- **Django 5.2.8** - Framework web
-- **Pandas** - Análise de dados
-- **Matplotlib** - Visualizações
-- **Seaborn** - Gráficos estatísticos
-- **Scikit-learn** - Machine Learning
+- **Python** (3.8 ou superior)
+- **Node.js** (LTS recomendado) & **npm**
 
-### Frontend
+## ⚡ Como Executar o Projeto
 
-- **React 19.1.1** - Interface do usuário
-- **Vite 7.1.7** - Build tool e desenvolvimento
-- **ESLint** - Linting de código
+### Método Automático (Windows)
 
-### Dados
+O projeto inclui um script `run_project.bat` que automatiza todo o processo de configuração e execução.
 
-- **CSV** - Formato dos datasets
-- **Jupyter Notebooks** - Análise exploratória
+1. Execute o arquivo `run_project.bat` na raiz do projeto.
+2. O script irá:
+   - Criar um ambiente virtual Python (`env`) se não existir.
+   - Instalar as dependências do backend (`requirements.txt`).
+   - Instalar as dependências do frontend (`package.json`).
+   - Iniciar o servidor Django (Backend) e o servidor Vite (Frontend).
 
-## 🚀 Como Executar
+### Método Manual
 
-### Pré-requisitos
+#### 1. Backend (Django)
 
-- Python 3.x
-- Node.js
-- npm ou yarn
+```bash
+# Navegue até a pasta backend
+cd backend
 
-### Backend (Django)
+# Crie um ambiente virtual
+python -m venv env
 
-1. **Ativar o ambiente virtual:**
+# Ative o ambiente virtual
+# Windows:
+env\Scripts\activate
+# Linux/Mac:
+source env/bin/activate
 
-   ```bash
-   # Windows
-   env\Scripts\activate
+# Instale as dependências
+pip install -r requirements.txt
 
-   # Linux/Mac
-   source env/bin/activate
-   ```
+# Execute as migrações (se necessário)
+python manage.py migrate
 
-2. **Instalar dependências:**
+# Inicie o servidor
+python manage.py runserver
+```
 
-   ```bash
-   cd backend
-   pip install -r requirements.txt
-   ```
+O backend estará rodando em `http://localhost:8000`.
 
-3. **Executar o servidor Django:**
+#### 2. Frontend (React)
 
-   ```bash
-   python manage.py runserver
-   ```
+```bash
+# Navegue até a pasta frontend
+cd frontend
 
-   O backend estará disponível em: `http://localhost:8000`
+# Instale as dependências
+npm install
 
-### Frontend (React + Vite)
+# Inicie o servidor de desenvolvimento
+npm run dev
+```
 
-1. **Instalar dependências:**
+O frontend estará rodando em `http://localhost:5173`.
 
-   ```bash
-   cd frontend
-   npm install
-   ```
+## 📡 Documentação da API
 
-2. **Executar o servidor de desenvolvimento:**
+### Energia (`/api/energia/`)
 
-   ```bash
-   npm run dev
-   ```
+- `GET /rendimento/`: Retorna dados de análise de rendimento.
+- `GET /correlacao/`: Retorna correlação entre variáveis de energia.
+- `GET /dados/`: Retorna o conjunto de dados completo processado.
 
-   O frontend estará disponível em: `http://localhost:5173`
+### Saúde (`/api/saude/`)
 
-### Notebooks de Análise
+- `GET /correlacao-variaveis/`: Retorna correlação entre variáveis de saúde.
+- `GET /dispersao-colesterol-pressao/`: Dados para gráfico de dispersão (Colesterol vs Pressão).
+- `GET /mapa-calor-correlacao/`: Dados para o mapa de calor de correlação.
 
-1. **Instalar Jupyter (se necessário):**
+## 🖥️ Funcionalidades do Frontend
 
-   ```bash
-   pip install jupyter
-   ```
-
-2. **Executar Jupyter:**
-
-   ```bash
-   jupyter notebook
-   ```
-
-3. **Abrir os notebooks:**
-   - `13.ipynb` - Análise de Painéis Solares
-   - `15.ipynb` - Análise de Risco Cardíaco
-
-## 📊 Datasets
-
-### painel_solar.csv
-
-Contém dados sobre eficiência de painéis solares:
-
-- `hora` - Hora do dia
-- `temperatura_c` - Temperatura em Celsius
-- `radiacao_wm2` - Radiação solar (W/m²)
-- `potencia_kw` - Potência gerada (kW)
-
-### risco_cardiaco.csv
-
-Contém dados médicos para análise de risco:
-
-- `paciente` - ID do paciente
-- `idade` - Idade do paciente
-- `colesterol` - Nível de colesterol
-- `pressao` - Pressão arterial
-- `risco` - Indicador de risco (0/1)
-
-## 🔧 Scripts Disponíveis
-
-### Frontend
-
-- `npm run dev` - Servidor de desenvolvimento
-- `npm run build` - Build para produção
-- `npm run lint` - Verificação de código
-- `npm run preview` - Preview do build
-
-### Backend
-
-- `python manage.py runserver` - Servidor de desenvolvimento
-- `python manage.py migrate` - Aplicar migrações
-- `python manage.py createsuperuser` - Criar superusuário
-
-## 🤝 Contribuição
-
-1. Faça um fork do projeto
-2. Crie uma branch para sua feature (`git checkout -b feature/nova-feature`)
-3. Commit suas mudanças (`git commit -am 'Adiciona nova feature'`)
-4. Push para a branch (`git push origin feature/nova-feature`)
-5. Abra um Pull Request
-
-## 📝 Licença
-
-Este projeto é destinado para fins educacionais e de estudo.
-
-## 👥 Autores
-
-- Desenvolvido para estudos de análise de dados e desenvolvimento web
-
----
-
-**Nota:** Este é um projeto acadêmico focado em aprendizado de ciência de dados, desenvolvimento web full-stack e análise de dados em cenários reais.
+- **Dashboard de Energia (`/energia`)**: Visualizações sobre eficiência de painéis solares, temperatura e potência.
+- **Dashboard de Saúde (`/saude`)**: Análises de dados cardíacos, incluindo correlações e dispersão de métricas de saúde.
+- **Responsividade**: Interface adaptável para diferentes tamanhos de tela, com suporte a tema claro/escuro.

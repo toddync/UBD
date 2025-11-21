@@ -10,15 +10,15 @@ import * as d3 from "d3";
  * @returns {Object} Theme colors object
  */
 export function getThemeColors() {
-    const styles = getComputedStyle(document.documentElement);
+  const styles = getComputedStyle(document.documentElement);
 
-    return {
-        textPrimary: styles.getPropertyValue("--text-primary").trim() || "#000",
-        textMuted: styles.getPropertyValue("--text-muted").trim() || "#666",
-        bgPrimary: styles.getPropertyValue("--bg-primary").trim() || "#fff",
-        bgSecondary: styles.getPropertyValue("--bg-secondary").trim() || "#f5f5f5",
-        bgTertiary: styles.getPropertyValue("--bg-tertiary").trim() || "#e5e5e5",
-    };
+  return {
+    textPrimary: styles.getPropertyValue("--text-primary").trim() || "#000",
+    textMuted: styles.getPropertyValue("--text-muted").trim() || "#666",
+    bgPrimary: styles.getPropertyValue("--bg-primary").trim() || "#fff",
+    bgSecondary: styles.getPropertyValue("--bg-secondary").trim() || "#f5f5f5",
+    bgTertiary: styles.getPropertyValue("--bg-tertiary").trim() || "#e5e5e5",
+  };
 }
 
 /**
@@ -29,29 +29,32 @@ export function getThemeColors() {
  * @returns {Object} {svg, g, width, height, containerWidth}
  */
 export function createResponsiveSVG(container, margin, height) {
-    // Clear previous chart
-    d3.select(container).selectAll("*").remove();
+  // Clear previous chart
+  d3.select(container).selectAll("*").remove();
 
-    const containerWidth = container.offsetWidth;
-    const width = containerWidth - margin.left - margin.right;
+  const containerWidth = container.offsetWidth;
+  const width = containerWidth - margin.left - margin.right;
 
-    if (width <= 0) {
-        return { svg: null, g: null, width: 0, height, containerWidth };
-    }
+  if (width <= 0) {
+    return { svg: null, g: null, width: 0, height, containerWidth };
+  }
 
-    const svg = d3
-        .select(container)
-        .append("svg")
-        .attr("width", "100%")
-        .attr("height", height + margin.top + margin.bottom)
-        .attr("viewBox", `0 0 ${containerWidth} ${height + margin.top + margin.bottom}`)
-        .attr("preserveAspectRatio", "xMidYMid meet");
+  const svg = d3
+    .select(container)
+    .append("svg")
+    .attr("width", "100%")
+    .attr("height", height + margin.top + margin.bottom)
+    .attr(
+      "viewBox",
+      `0 0 ${containerWidth} ${height + margin.top + margin.bottom}`
+    )
+    .attr("preserveAspectRatio", "xMidYMid meet");
 
-    const g = svg
-        .append("g")
-        .attr("transform", `translate(${margin.left},${margin.top})`);
+  const g = svg
+    .append("g")
+    .attr("transform", `translate(${margin.left},${margin.top})`);
 
-    return { svg, g, width, height, containerWidth };
+  return { svg, g, width, height, containerWidth };
 }
 
 /**
@@ -64,20 +67,20 @@ export function createResponsiveSVG(container, margin, height) {
  * @param {string} color - Grid line color
  */
 export function addGridLines(g, xScale, yScale, width, height, color) {
-    // Vertical grid lines
-    g.append("g")
-        .attr("class", "grid")
-        .attr("transform", `translate(0,${height})`)
-        .call(d3.axisBottom(xScale).tickSize(-height).tickFormat(""))
-        .attr("stroke-opacity", 0.1)
-        .attr("color", color);
+  // Vertical grid lines
+  g.append("g")
+    .attr("class", "grid")
+    .attr("transform", `translate(0,${height})`)
+    .call(d3.axisBottom(xScale).tickSize(-height).tickFormat(""))
+    .attr("stroke-opacity", 0.1)
+    .attr("color", color);
 
-    // Horizontal grid lines
-    g.append("g")
-        .attr("class", "grid")
-        .call(d3.axisLeft(yScale).tickSize(-width).tickFormat(""))
-        .attr("stroke-opacity", 0.1)
-        .attr("color", color);
+  // Horizontal grid lines
+  g.append("g")
+    .attr("class", "grid")
+    .call(d3.axisLeft(yScale).tickSize(-width).tickFormat(""))
+    .attr("stroke-opacity", 0.1)
+    .attr("color", color);
 }
 
 /**
@@ -87,9 +90,9 @@ export function addGridLines(g, xScale, yScale, width, height, color) {
  * @returns {Function} Debounced function
  */
 export function debounce(fn, delay) {
-    let timeoutId;
-    return function (...args) {
-        clearTimeout(timeoutId);
-        timeoutId = setTimeout(() => fn.apply(this, args), delay);
-    };
+  let timeoutId;
+  return function (...args) {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => fn.apply(this, args), delay);
+  };
 }
